@@ -3,6 +3,7 @@ package main;
 import javax.swing.JFrame;
 
 import graphics.Assets;
+import states.GameState;
 
 import java.awt.Canvas;
 import java.awt.Dimension;
@@ -25,6 +26,8 @@ public class Window extends JFrame implements Runnable {
     private double TARGETTIME = 1000000000 / FPS; // 1 segundo en nanosegundos
     private double delta = 0; // Diferencia de tiempo entre un fotograma y otro
     private int AVERAGEFPS = FPS; // Promedio de FPS que se muestra en pantalla
+
+    private GameState gameState;
 
     public Window() {
         setTitle("Juego de naves"); 
@@ -53,7 +56,7 @@ public class Window extends JFrame implements Runnable {
 
 
     private void update(){
-       
+       gameState.update();
     }
 
     private void draw(){
@@ -71,9 +74,10 @@ public class Window extends JFrame implements Runnable {
 
         g.fillRect(0, 0, WIDTH, HEIGHT);
 
+        gameState.draw(g);
+
         g.drawString("" + AVERAGEFPS, 10, 10);
 
-        g.drawImage(Assets.player, 100, 100, null);
 
         //...............................................
         g.dispose();
@@ -82,6 +86,7 @@ public class Window extends JFrame implements Runnable {
 
     private void init(){
         Assets.init(); // Inicializamos los elementos
+        gameState = new GameState(); // Creamos un nuevo estado de juego
     }
 
     @Override
