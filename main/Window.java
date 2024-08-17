@@ -1,6 +1,9 @@
 package main;
 
 import javax.swing.JFrame;
+
+import graphics.Assets;
+
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -48,9 +51,9 @@ public class Window extends JFrame implements Runnable {
         new Window().start();
     }
 
-    int x = 0;
+
     private void update(){
-        x++; // Incrementamos un pixel
+       
     }
 
     private void draw(){
@@ -64,17 +67,22 @@ public class Window extends JFrame implements Runnable {
 
         // Dibujamos los elementos
 
-        g.clearRect(0, 0, WIDTH, HEIGHT);
-
         g.setColor(Color.black);
 
+        g.fillRect(0, 0, WIDTH, HEIGHT);
+
         g.drawString("" + AVERAGEFPS, 10, 10);
+
+        g.drawImage(Assets.player, 100, 100, null);
 
         //...............................................
         g.dispose();
         bs.show(); // Mostramos el buffer
     }
 
+    private void init(){
+        Assets.init(); // Inicializamos los elementos
+    }
 
     @Override
     public void run() {
@@ -84,6 +92,7 @@ public class Window extends JFrame implements Runnable {
         int frames = 0; // Contador de fotogramas
         long time = 0; // Tiempo transcurrido
 
+        init(); // Inicializamos los elementos
 
         while (running) {
             now = System.nanoTime(); // Actualizamos el tiempo actual
