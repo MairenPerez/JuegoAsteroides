@@ -3,6 +3,7 @@ package main;
 import javax.swing.JFrame;
 
 import graphics.Assets;
+import input.KeyBoard;
 import states.GameState;
 
 import java.awt.Canvas;
@@ -29,6 +30,8 @@ public class Window extends JFrame implements Runnable {
 
     private GameState gameState;
 
+    private KeyBoard keyBoard;
+
     public Window() {
         setTitle("Juego de naves"); 
         setSize(WIDTH, HEIGHT);  
@@ -39,7 +42,9 @@ public class Window extends JFrame implements Runnable {
 
         // Creamos el objeto Canvas
 
-        canvas = new Canvas(); 
+        canvas = new Canvas();
+        
+        keyBoard = new KeyBoard(); 
 
         canvas.setPreferredSize(new Dimension(WIDTH, HEIGHT)); // Establecemos las dimensiones del canvas
         canvas.setMaximumSize(new Dimension(WIDTH, HEIGHT)); 
@@ -48,6 +53,7 @@ public class Window extends JFrame implements Runnable {
 
         // Agragamos el Canvas a la ventana creada anteriormente
         add(canvas);
+        canvas.addKeyListener(keyBoard); // Agregamos el KeyListener al canvas
     }
 
     public static void main(String[] args) {
@@ -56,6 +62,7 @@ public class Window extends JFrame implements Runnable {
 
 
     private void update(){
+        keyBoard.update();
        gameState.update();
     }
 

@@ -13,7 +13,15 @@ public class Player extends GameObject  {
     
         @Override
         public void update() {
-            
+            if (input.KeyBoard.UP) {
+                position.setY(position.getY() - 3);
+            }
+            if (input.KeyBoard.LEFT) {
+                position.setX(position.getX() - 3);
+            }
+            if (input.KeyBoard.RIGHT) {
+                position.setX(position.getX() + 3);
+            }
         }
     
         @Override
