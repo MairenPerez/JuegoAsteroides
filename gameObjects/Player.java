@@ -5,12 +5,15 @@ import java.awt.image.BufferedImage;
 
 import math.Vector2D;
 
-public class Player extends GameObject  {
+public class Player extends MovingObject{
         
-        public Player(Vector2D position, BufferedImage texture) {
-            super(position, texture);
-        }
-    
+        private Vector2D heading;
+
+        public Player(Vector2D position, Vector2D velocity, BufferedImage texture) {
+        super(position, velocity, texture);
+        
+    }
+
         @Override
         public void update() {
             if (input.KeyBoard.UP) {
